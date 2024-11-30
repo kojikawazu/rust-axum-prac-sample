@@ -1,9 +1,10 @@
 // モジュールのインポート
+mod di;
+mod errors;
+mod models;
 mod routes;
 mod services;
-mod models;
 mod state;
-mod errors;
 // 必要なクレートのインポート
 use axum::serve;
 use dotenv::dotenv;

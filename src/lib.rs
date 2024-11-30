@@ -1,9 +1,10 @@
 // モジュールの宣言と公開
+pub mod di;
+pub mod errors;
 pub mod models;
 pub mod routes;
 pub mod services;
 pub mod state;
-pub mod errors;
 // 必要なクレートのインポート
 use axum::Router;
 use std::sync::Arc;
