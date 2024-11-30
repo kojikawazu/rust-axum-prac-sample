@@ -3,6 +3,14 @@ name = "backend"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "backend"
+path = "src/lib.rs"
+
+[[bin]]
+name = "backend"
+path = "src/main.rs"
+
 [dependencies]
 # フレームワーク
 axum = { version = "0.7", features = ["macros"] } 
@@ -55,3 +63,5 @@ dotenv = "0.15"
 futures-util = "0.3"
 # バイト列
 bytes = "1.0"
+# Mock
+mockito = "1.0"

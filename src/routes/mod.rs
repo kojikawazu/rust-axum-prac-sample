@@ -78,6 +78,16 @@ impl utoipa::Modify for SecurityAddon {
 
 // ルーティングを作成する関数
 pub fn create_routes(state: Arc<AppState>) -> Router {
+    // コンテナの初期化
+    let container = {
+        use crate::di::container::Container;
+        Container::new(
+            state.client.clone(),
+            state.supabase_url.clone(),
+            state.supabase_anon_key.clone(),
+        )
+    };
+
     // 新しいルーターを作成し、ユーザールーティングをマージ
     Router::new()
         // ユーザールーティングをマージ
@@ -87,4 +97,6 @@ pub fn create_routes(state: Arc<AppState>) -> Router {
         // Swagger UIをマージ
         .merge(SwaggerUi::new("/swagger-ui")
             .url("/api-docs/openapi.json", ApiDoc::openapi()))
+        // ユーザールーティングをマージ
+        .merge(container.user_router().routes())
 }

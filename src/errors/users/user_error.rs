@@ -8,7 +8,6 @@ pub enum UserError {
     // データベースエラー
     #[error("データベースエラー: {0}")]
     DatabaseError(String),
-    // ユーザーが見つかりません
     #[error("ユーザーが見つかりません")]
     UserNotFound,
     // 不正なデータ形式
@@ -17,6 +16,9 @@ pub enum UserError {
     // パスワード処理エラー
     #[error("パスワード処理エラー: {0}")]
     PasswordError(String),
+    // JSONエラー
+    #[error("JSONエラー: {0}")]
+    JsonError(String),
 }
 
 // エラーをHTTPステータスコードとメッセージに変換
@@ -26,11 +28,13 @@ impl From<UserError> for (StatusCode, String) {
             // データベースエラー
             UserError::DatabaseError(msg) => (StatusCode::INTERNAL_SERVER_ERROR, msg),
             // ユーザーが見つかりません
-            UserError::UserNotFound => (StatusCode::NOT_FOUND, "User not found.".to_string()),
+            UserError::UserNotFound => (StatusCode::NOT_FOUND, "ユーザーが見つかりません".to_string()),
             // 不正なデータ形式
             UserError::InvalidData(msg) => (StatusCode::BAD_REQUEST, msg),
             // パスワード処理エラー
             UserError::PasswordError(msg) => (StatusCode::INTERNAL_SERVER_ERROR, msg),
+            // JSONエラー
+            UserError::JsonError(msg) => (StatusCode::INTERNAL_SERVER_ERROR, msg),
         }
     }
 }

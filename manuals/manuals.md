@@ -54,4 +54,6 @@ cargo test
 cargo test user_services_test
 # ユーザーサービスの統合テスト
 cargo test --test user_services_integration_test
+# テストのログを出力
+RUST_LOG=debug cargo test test_create -- --nocapture
 ```

@@ -3,8 +3,6 @@ use serde::{Deserialize, Serialize};
 use chrono::NaiveDateTime;
 use utoipa::ToSchema;
 use uuid::Uuid;
-// 基本型のスキーマラッパーのインポート
-use crate::models::{NaiveDateTimeWrapper, UuidWrapper};
 
 // ユーザーモデルの定義
 #[derive(Serialize, Deserialize, Clone, Debug, ToSchema)]
